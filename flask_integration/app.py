@@ -4,9 +4,6 @@ from flask import Flask, render_template, flash, request, session
 from werkzeug.utils import secure_filename
 from get_model import *
 
-# initializing the model
-MODEL_PATH = "../models/logistic_reg.sav"
-model = LoadModel(MODEL_PATH)
 
 # App config.
 DEBUG = True
@@ -50,7 +47,9 @@ def diagnosis():
     pe = request.form['pe']
     Ane = request.form['Ane']
 
-
+    # initializing the model
+    MODEL_PATH = "../models/logistic_reg.sav"
+    model = LoadModel(MODEL_PATH)
     #Predict on the given parameters
 
     prediction = model.predict_class(Age,Bp,Sg,Al,Su,Rbc,Pc,Pcc,Ba,Bgr,Bu,Sc,Sod,Pot,Hemo,Pcv,Wbcc,Rbcc,Htn,Dm,Cad,Appet,pe,Ane)
@@ -71,6 +70,7 @@ app.config['UPLOAD_FILE_NAME'] = 'uploaded_file.csv'
 @app.route('/', methods=['GET', 'POST'])
 
 def upload():
+
     if request.method == 'POST':
         file = request.files['file']
         file.filename = 'uploaded_file.csv'

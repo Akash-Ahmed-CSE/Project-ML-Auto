@@ -17,8 +17,7 @@ def Get_CSV():
             # breaking the loop after the
             # first iteration itself
             break
-
     # printing the result
     print("List of column names : ", list_of_column_names[0])
     print("Name if the fist header : ", list_of_column_names[0][0])
-
+Get_CSV()
