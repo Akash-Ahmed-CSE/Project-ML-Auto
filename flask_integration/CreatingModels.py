@@ -8,14 +8,11 @@ def Create_Mode():
     from sklearn.model_selection import train_test_split
     from sklearn.linear_model import LogisticRegression
 
-
     # importing datasets
     df = pd.read_csv("../data/uploaded_file.csv", na_values="?")
     df.replace("?", np.NaN)
     # print(df.head(10))
     # print(df.isna().sum())
-
-
 
     # Replacing null value
     df.fillna(round(df.mean(), 2), inplace=True)
@@ -60,4 +57,3 @@ def Create_Mode():
     MODEL_PATH = "../models/logistic_reg.sav"
     pickle.dump(logreg, open(MODEL_PATH, 'wb'))
     print("Your LogisticRegression model has been trained successfully !")
-Create_Mode()
