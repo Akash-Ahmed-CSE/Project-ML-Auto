@@ -6,18 +6,17 @@ def Get_CSV():
         # with the delimiter as ,
         csv_reader = csv.reader(csv_file, delimiter=',')
 
-        # list to store the names of columns
-        list_of_column_names = []
+        headers = next(csv_reader)
 
-        # loop to iterate through the rows of csv
-        for row in csv_reader:
-            # adding the first row
-            list_of_column_names.append(row)
+        # Print the headers
+        for header in headers:
+            print(header)
+        # Store the headers in a dictionary
+        header_dict = {index: header for index, header in enumerate(headers)}
 
-            # breaking the loop after the
-            # first iteration itself
-            break
-    # printing the result
-    print("List of column names : ", list_of_column_names[0])
-    print("Name if the fist header : ", list_of_column_names[0][0])
+        # Alternatively, you can access headers dynamically using the index
+        index = 0
+        header_value = header_dict.get(index)  # Returns None if index is not found
+        if header_value:
+            print(f"Header at index {index}: {header_value}")
 Get_CSV()
