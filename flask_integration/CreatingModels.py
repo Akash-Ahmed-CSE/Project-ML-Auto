@@ -7,14 +7,14 @@ def Create_Mode():
     from sklearn import preprocessing
     from sklearn.model_selection import train_test_split
     from sklearn.linear_model import LogisticRegression
-    import Get_CSV_File_Headers
+
 
     # importing datasets
     df = pd.read_csv("../data/uploaded_file.csv", na_values="?")
     df.replace("?", np.NaN)
     # print(df.head(10))
     # print(df.isna().sum())
-    Get_CSV_File_Headers.Get_CSV()
+
 
 
     # Replacing null value
