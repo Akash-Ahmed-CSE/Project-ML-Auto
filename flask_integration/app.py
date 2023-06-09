@@ -1,15 +1,12 @@
 import os
-
+import time
 from flask import Flask, render_template, flash, request, session
 from werkzeug.utils import secure_filename
-
 from get_model import *
 
-
-#initializing the model
-MODEL_PATH = "../models/XGBClassifier.sav"
+# initializing the model
+MODEL_PATH = "../models/logistic_reg.sav"
 model = LoadModel(MODEL_PATH)
-
 
 # App config.
 DEBUG = True
@@ -27,6 +24,7 @@ def index():
 #Define diagnosis route
 @app.route("/diagnosis", methods=['POST'])
 def diagnosis():
+
     Age = request.form['Age']
     Bp = request.form['Bp']
     Sg = request.form['Sg']
@@ -53,9 +51,8 @@ def diagnosis():
     Ane = request.form['Ane']
 
 
-    #Pcc = request.form['ZZZZZZZZZZZZZZZZZZ']
-
     #Predict on the given parameters
+
     prediction = model.predict_class(Age,Bp,Sg,Al,Su,Rbc,Pc,Pcc,Ba,Bgr,Bu,Sc,Sod,Pot,Hemo,Pcv,Wbcc,Rbcc,Htn,Dm,Cad,Appet,pe,Ane)
     print(prediction)
     #Route for result
@@ -81,7 +78,9 @@ def upload():
         flash('File uploaded successfully')
         print(file.filename)
         app.config['PREDICTED_CLASS'] = request.form.get('className')
-
+        import CreatingModels
+        CreatingModels.Create_Mode()
+        print("Model")
     return render_template("index.html")
 
 if __name__ == "__main__":
