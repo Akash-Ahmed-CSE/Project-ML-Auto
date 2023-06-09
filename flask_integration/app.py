@@ -11,18 +11,14 @@ app = Flask(__name__)
 app.config.from_object(__name__)
 app.config['SECRET_KEY'] = '7d441f27d441f27567d441f2b6176a'
 
-
 #Define home route
 #@app.route("/")
 
 def index():
     return render_template("index.html")
-
 #Define diagnosis route
 @app.route("/diagnosis", methods=['POST'])
 def diagnosis():
-
-    import csv
     with open('../data/uploaded_file.csv') as csv_file:
         # creating an object of csv reader
         # with the delimiter as ,
