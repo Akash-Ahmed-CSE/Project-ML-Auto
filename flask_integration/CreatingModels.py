@@ -35,8 +35,8 @@ def Create_Mode():
     y = np.asarray(df['Class'])
     y[0:5]
 
-    # Normalize Dataset
-    X = preprocessing.StandardScaler().fit(X).transform(X)
+    # Normalize Dataset( We do not need this for this dataset)
+    #X = preprocessing.StandardScaler().fit(X).transform(X)
     # print(X[0:5])
 
     # Spliting for Train & Test Dataset
