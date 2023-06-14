@@ -7,25 +7,14 @@ def Create_Model(predictedClassName):
     from sklearn import preprocessing
     from sklearn.model_selection import train_test_split
     from sklearn.linear_model import LogisticRegression
-    import Get_CSV_File_Headers
-
+    import csv
     # importing datasets
     df = pd.read_csv("../data/uploaded_file.csv", na_values="?")
     df.replace("?", np.NaN)
-    # print(df.head(10))
-    # print(df.isna().sum())
-    Get_CSV_File_Headers.Get_CSV()
 
 
     # Replacing null value
     df.fillna(round(df.mean(), 2), inplace=True)
-<<<<<<< Updated upstream
-    # converting the target value to integer type
-    df = df[['Age', 'Bp', 'Sg', 'Al', 'Su', 'Rbc', 'Pc', 'Pcc', 'Ba', 'Bgr', 'Bu', 'Sc', 'Sod', 'Pot', 'Hemo', 'Pcv',
-             'Wbcc', 'Rbcc', 'Htn', 'Dm', 'Cad', 'Appet', 'pe', 'Ane', 'Class']]
-    df['Class'] = df['Class'].astype('int')
-    # print(df.head(10))
-=======
 
     #Only selecting a header except "Class"
     with open('../data/uploaded_file.csv') as csv_file:
@@ -37,21 +26,15 @@ def Create_Model(predictedClassName):
 
     # converting the target value to integer type
     df[predictedClassName] = df[predictedClassName].astype('int')
->>>>>>> Stashed changes
 
     # Define X and Y for Implement Models
-    X = np.asarray(df[['Age', 'Bp', 'Sg', 'Al', 'Su', 'Rbc', 'Pc', 'Pcc', 'Ba', 'Bgr', 'Bu', 'Sc', 'Sod', 'Pot', 'Hemo',
-                       'Pcv', 'Wbcc', 'Rbcc', 'Htn', 'Dm', 'Cad', 'Appet', 'pe', 'Ane']])
+    X = np.asarray(df[headers])
     X[0:5]
     y = np.asarray(df[predictedClassName])
     y[0:5]
 
     # Normalize Dataset
-<<<<<<< Updated upstream
-    X = preprocessing.StandardScaler().fit(X).transform(X)
-=======
     #X = preprocessing.StandardScaler().fit(X).transform(X)
->>>>>>> Stashed changes
     # print(X[0:5])
 
     # Spliting for Train & Test Dataset
@@ -78,9 +61,5 @@ def Create_Model(predictedClassName):
     MODEL_PATH = "../models/logistic_reg.sav"
     pickle.dump(logreg, open(MODEL_PATH, 'wb'))
     print("Your LogisticRegression model has been trained successfully !")
-<<<<<<< Updated upstream
-Create_Mode()
-=======
 
 #Create_Model(className)
->>>>>>> Stashed changes

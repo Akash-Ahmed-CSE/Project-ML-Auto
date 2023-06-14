@@ -28,14 +28,8 @@ class LoadModel:
 #Test LoadModel
 if __name__ == '__main__':
     MODEL_PATH = "../models/logistic_reg.sav"
-<<<<<<< Updated upstream
-    model = LoadModel(MODEL_PATH)
-    predicted_class = model.predict_class(48,50,1.02,4,0,1,1,0,0,121,18,1.2,137.53,4.63,11.3,44,6000,4.71,1,1,0,1,0,0)
-    print(predicted_class)
-=======
     # model = LoadModel(MODEL_PATH)
     # predicted_class = model.predict_class(48,50,1.02,4,0,1,1,0,0,121,18,1.2,137.53,4.63,11.3,44,6000,4.71,1,1,0,1,0,0)
     # print(predicted_class)
->>>>>>> Stashed changes
 
 
