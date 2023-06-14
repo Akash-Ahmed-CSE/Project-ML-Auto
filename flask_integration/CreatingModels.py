@@ -1,4 +1,4 @@
-def Create_Mode():
+def Create_Model(predictedClassName):
     # import required modules
     import pickle
     import os
@@ -19,21 +19,39 @@ def Create_Mode():
 
     # Replacing null value
     df.fillna(round(df.mean(), 2), inplace=True)
+<<<<<<< Updated upstream
     # converting the target value to integer type
     df = df[['Age', 'Bp', 'Sg', 'Al', 'Su', 'Rbc', 'Pc', 'Pcc', 'Ba', 'Bgr', 'Bu', 'Sc', 'Sod', 'Pot', 'Hemo', 'Pcv',
              'Wbcc', 'Rbcc', 'Htn', 'Dm', 'Cad', 'Appet', 'pe', 'Ane', 'Class']]
     df['Class'] = df['Class'].astype('int')
     # print(df.head(10))
+=======
+
+    #Only selecting a header except "Class"
+    with open('../data/uploaded_file.csv') as csv_file:
+        csv_reader = csv.reader(csv_file, delimiter=',')
+        headers = next(csv_reader)
+        headers.remove(predictedClassName)
+        print(headers)
+
+
+    # converting the target value to integer type
+    df[predictedClassName] = df[predictedClassName].astype('int')
+>>>>>>> Stashed changes
 
     # Define X and Y for Implement Models
     X = np.asarray(df[['Age', 'Bp', 'Sg', 'Al', 'Su', 'Rbc', 'Pc', 'Pcc', 'Ba', 'Bgr', 'Bu', 'Sc', 'Sod', 'Pot', 'Hemo',
                        'Pcv', 'Wbcc', 'Rbcc', 'Htn', 'Dm', 'Cad', 'Appet', 'pe', 'Ane']])
     X[0:5]
-    y = np.asarray(df['Class'])
+    y = np.asarray(df[predictedClassName])
     y[0:5]
 
     # Normalize Dataset
+<<<<<<< Updated upstream
     X = preprocessing.StandardScaler().fit(X).transform(X)
+=======
+    #X = preprocessing.StandardScaler().fit(X).transform(X)
+>>>>>>> Stashed changes
     # print(X[0:5])
 
     # Spliting for Train & Test Dataset
@@ -60,4 +78,9 @@ def Create_Mode():
     MODEL_PATH = "../models/logistic_reg.sav"
     pickle.dump(logreg, open(MODEL_PATH, 'wb'))
     print("Your LogisticRegression model has been trained successfully !")
+<<<<<<< Updated upstream
 Create_Mode()
+=======
+
+#Create_Model(className)
+>>>>>>> Stashed changes
