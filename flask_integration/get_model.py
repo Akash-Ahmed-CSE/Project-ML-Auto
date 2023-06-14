@@ -21,7 +21,7 @@ class LoadModel:
         df = pd.DataFrame(data, columns=self.headers)
         new_pred = self.loaded_model.predict(df)
         return new_pred
-
+#
 #48,50,1.02,4,0,1,1,0,0,121,18,1.2,137.53,4.63,11.3,44,6000,4.71,1,1,0,1,0,0 -> for 1 (positive)
 #82,60,1.025,0,0,1,1,0,0,137,17,0.4,147,4.7,14.3,34,6700,5.9,0,1,0,1,0,0 -> for 0 (Negative)
 
