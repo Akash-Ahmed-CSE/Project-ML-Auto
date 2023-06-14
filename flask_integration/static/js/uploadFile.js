@@ -30,14 +30,24 @@ fileInput.addEventListener("change", () => {
 
 function validateFileType() {
         var inputElement = document.getElementById('file-input');
-        console.log("input element", inputElement.files);
+
+        //Get the file upload by user
         var files = inputElement.files;
+        //Get the predicted class name for the model
+        var predictedClassName = document.getElementById('className').value;
+
         if(files.length==0){
           alert("Please choose a file first...");
           return false;
         }
-        else{
 
+
+        else if(predictedClassName.length == 0 ){
+            alert("Please enter the predicted column name first...");
+            return false;
+        }
+
+        else{
           var filename = files[0].name;
           console.log("filename", filename);
           /* getting file extenstion eg- .jpg,.png, etc */
@@ -47,47 +57,7 @@ function validateFileType() {
           /* testing extension with regular expression */
           var isAllowed = allowedExtensionsRegx.test(extension);
           if(isAllowed){
-           // alert("File type is valid for the upload!");
-            /*file upload logic goes here... */
 
-
-           /* const form = document.getElementById('file-input');
-            console.log("form", form);
-            let file = form.files[0]
-              let formData = new FormData();
-              formData.set('file', file);
-              console.log('formData',formData);
-              // convert the form into POST data
-              const serializedFormData = new FormData(event.target);
-              console.log("serializedFormData", serializedFormData);
-              // use your favorite AJAX library
-              axios.post(
-                "D:/Projects/ML Projects/CKD Implementation(ML based web project)/data",
-                serializedFormData
-              ).then(response => {
-                console.log("success!");
-                console.log("");
-              }).catch(error => {
-                console.log("falied!");
-                console.log(error.response);
-              });
-
-
-
-              // fetch('../data/' + encodeURIComponent(filename), {method:'PUT',body:fileInput.files[0]});
-              // console.log("formData", fileInput.files[0]);
-
-
-  /*const formData = new FormData(form);
-
-  const fetchOptions = {
-    method: form.method,
-    body: formData,
-  };
-
-  fetch(url, fetchOptions);
-
-    alert('The file has been uploaded successfully.');*/
           }
           else{
             alert("Invalid file type. Please upload only .csv type file!");

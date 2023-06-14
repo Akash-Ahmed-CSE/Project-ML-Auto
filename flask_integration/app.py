@@ -10,6 +10,7 @@ DEBUG = True
 app = Flask(__name__)
 app.config.from_object(__name__)
 app.config['SECRET_KEY'] = '7d441f27d441f27567d441f2b6176a'
+predictedClassName = ""
 
 #Define home route
 #@app.route("/")
@@ -34,10 +35,13 @@ def diagnosis():
                 variable_values.append(var_value)
 
         MODEL_PATH = "../models/logistic_reg.sav"
-        model = LoadModel(MODEL_PATH)
+        print(predictedClassName)
+        model = LoadModel(MODEL_PATH, predictedClassName)
+        print(model)
         #Predict on the given parameters
         prediction = model.predict_class(*variable_values)
         print(prediction)
+
         #Route for result
         if int(prediction[0]) == 1:
             return render_template("positive.html", result="true")
@@ -61,10 +65,11 @@ def upload():
         file.save(os.path.join(app.config['UPLOAD_FOLDER'],secure_filename(file.filename)))
         flash('File uploaded successfully')
         print(file.filename)
-        app.config['PREDICTED_CLASS'] = request.form.get('className')
+        global predictedClassName
+        predictedClassName = request.form.get('className')
+
         import CreatingModels
-        CreatingModels.Create_Mode()
-        print("Model")
+        CreatingModels.Create_Model(predictedClassName)
     return render_template("index.html")
 
 if __name__ == "__main__":
