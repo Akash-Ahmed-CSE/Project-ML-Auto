@@ -30,7 +30,7 @@ def diagnosis():
 
         variable_values = []
         for var_name in headers:
-            if var_name != 'Class':  # Exclude 'Class' variable from variable_values
+            if var_name != predictedClassName:  # Exclude 'Class' variable from variable_values
                 var_value = request.form.get(var_name)
                 variable_values.append(var_value)
 
